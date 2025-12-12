@@ -5,6 +5,14 @@ const buttonSumAll = document.querySelector(".sum-all");
 const buttonFilterVegan = document.querySelector(".filter-vegan");
 let myLi = "";
 
+function formatCurrency(value) {
+    const newValue = value.toLocaleString("pt-br", {
+        style: "currency",
+        currency: "BRL",
+    });
+    return newValue;
+}   
+
 function showAll(productsArray) {
     myLi = ""; // Reset para evitar acumulação
     productsArray.forEach((product) => {
@@ -12,7 +20,7 @@ function showAll(productsArray) {
                 <li>
                         <img src="${product.src}" alt="${product.name}">
                         <p>${product.name}</p>
-                        <p class="item-price">R$${product.price}</p>
+                        <p class="item-price">R$${formatCurrency(product.price)}</p>
                 </li>
         `;
   });
@@ -39,7 +47,7 @@ function sumAll() {
 
     list.innerHTML = `
         <li>
-            <p>O valor total dos produtos é R$ ${productSum}</p>
+            <p>O valor total dos produtos é R$ ${formatCurrency(productSum)}</p>
         </li>
     `
 
@@ -57,6 +65,8 @@ function filterVegan() {
 
     showAll(veganProducts)
 }
+
+
 
 
 
